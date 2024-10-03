@@ -12,15 +12,16 @@ This project is a simple Students Management System built using [your tech stack
 1. **Clone the project repository:**
 
    ```bash
-   git clone https://github.com/your-username/your-repository-name.git
-   cd your-repository-name
+   https://github.com/Lawliet06/Michiru-student-management-system.git
    ```
 
-Install the necessary dependencies:
+2. **Install the necessary dependencies:**
 
 Open your terminal in the project directory and run:
 
+```bash
 npm install
+```
 Set up the database:
 
 Open phpMyAdmin in your browser.
@@ -33,7 +34,9 @@ Run the server:
 
 Go back to your terminal and type:
 
+```bash
 npm start
+```
 
 Access the application:
 
