@@ -1,0 +1,93 @@
+/* Custom table styles */
+.table{
+    margin: auto;
+    margin-right: 1.2rem;
+    margin-bottom: 1.5rem;
+    background-color: rgb(234, 245, 255);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #808080;
+    padding: 10px;
+    text-align: left;
+   
+    
+  }
+
+  .custom-table .btns {
+    text-align: center;
+  }
+  
+  .custom-table th {
+    background-color: #02164c;
+    color: #fff;
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Buttons */
+  .btn-add {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .btn-edit {
+    background-color: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 1rem;
+    
+  }
+  
+  .btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    
+  }
+  
+  /* Adjusting icon and text alignment for buttons */
+.btn-add, .btn-edit, .btn-delete {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .btn-add i {
+    margin-right: 5px; /* Spacing between icon and text */
+  }
+  
+  /* Navigation styles */
+  .nav__toggle {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .nav__link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    text-decoration: none;
+  }
+  
+
+  .nav__icon {
+    margin-right: 10px;
+  }
+  

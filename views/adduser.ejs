@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>add</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <%- include('partials/nav') %>
+
+    <div
+      style="margin: 2rem; background-color: rgb(213, 224, 234); padding: 2rem"
+    >
+      <form action="/save" method="post">
+        <!-- Student Information -->
+        <h4>Student Information</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="firstName"
+              >First Name <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="first_name"
+              placeholder="Enter First Name"
+              required
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              name="last_name"
+              placeholder="Enter Last Name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="dob"
+              >Date of Birth <span class="text-danger">*</span></label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="dob"
+              name="dob"
+              required
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label>Gender <span class="text-danger">*</span></label
+            ><br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gender"
+                id="genderMale"
+                value="Male"
+                required
+              />
+              <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gender"
+                id="genderFemale"
+                value="Female"
+              />
+              <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- Parent Details -->
+        <h4>Parent Details</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fatherName">Father Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fatherName"
+              name="father_name"
+              placeholder="Enter Father Name"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fatherProfession">Father Profession</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fatherProfession"
+              name="father_profession"
+              placeholder="Enter Father Occupation"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="motherName">Mother Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="motherName"
+              name="mother_name"
+              placeholder="Enter Mother Name"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="motherProfession">Mother Profession</label>
+            <input
+              type="text"
+              class="form-control"
+              id="motherProfession"
+              name="mother_profession"
+              placeholder="Enter Mother Occupation"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fatherContact">Father Contact No</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fatherContact"
+              name="father_contact"
+              placeholder="Enter Father Contact No"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="motherContact">Mother Contact No</label>
+            <input
+              type="text"
+              class="form-control"
+              id="motherContact"
+              name="mother_contact"
+              placeholder="Enter Mother Contact No"
+            />
+          </div>
+        </div>
+        <hr />
+
+        <!-- Contact Information -->
+        <h4>Contact Information</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="mobileNumber"
+              >Mobile Number <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="mobileNumber"
+              name="mobile_number"
+              placeholder="Enter Mobile Number"
+              required
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="email"
+              >Email Address <span class="text-danger">*</span></label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter Email Address"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="city">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              name="city"
+              placeholder="Enter City"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="village">Village</label>
+            <input
+              type="text"
+              class="form-control"
+              id="village"
+              name="village"
+              placeholder="Enter village"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="country">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="country"
+              name="country"
+              placeholder="Enter Country"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="postal">Postal Office address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="postalCode"
+              name="postal"
+              placeholder="Enter Postal Office address"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fullAddress">Full Address</label>
+          <textarea
+            class="form-control"
+            id="fullAddress"
+            name="full_address"
+            rows="3"
+            placeholder="Enter Full Address"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Register a student
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

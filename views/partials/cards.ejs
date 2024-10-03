@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cards</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/cards.css" />
+  </head>
+  <body>
+    <div class="grey-bg container-fluid">
+      <section id="minimal-statistics">
+        <div class="row">
+          <div class="col-12 mt-3 mb-1">
+            <h4 class="text-uppercase">Students statistics</h4>
+            
+          </div>
+        </div>
+
+        <section>
+          <div class="row">
+            <div class="col-md-4 col-xl-3">
+              <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Enquiries</h6>
+                  <h2 class="text-right">
+                    <i class="fa-solid fa-user-tag f-left"></i><span>0</span>
+                  </h2>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="card bg-c-green order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Males</h6>
+                  <h2 class="text-right">
+                    <i class="fa-solid fa-person f-left"></i><span><%= maleCount %></span>
+                  </h2>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Females</h6>
+                  <h2 class="text-right">
+                    <i class="fa-solid fa-person-dress f-left"></i><span><%= femaleCount %></span>
+                  </h2>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                  <h6 class="m-b-20">Closed</h6>
+                  <h2 class="text-right">
+                    <i class="fas fa-sign-out-alt f-left"></i><span>0</span>
+                  </h2>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        <section>
+
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="primary"><%= userCount %></h3>
+                      <span>New </span>
+                    </div>
+                    <div class="align-self-center">
+                      <i class="icon-user primary font-large-2 float-right"></i>
+
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-primary"
+                      role="progressbar"
+                      style="width: 80%"
+                      aria-valuenow="80"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="warning"><%= userCount %></h3>
+                      <span>Enrolled</span>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="icon-check warning font-large-2 float-right"></i>
+
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-warning"
+                      role="progressbar"
+                      style="width: 35%"
+                      aria-valuenow="35"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="success">0</h3>
+                      <span>Waiting List</span>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="icon-hourglass success font-large-2 float-right"></i>
+
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 10%"
+                      aria-valuenow="10"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="danger">0</h3>
+                      <span>Pending Review</span>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="icon-clock danger font-large-2 float-right"></i>
+
+                    </div>
+                  </div>
+                  <div class="progress mt-1 mb-0" style="height: 7px">
+                    <div
+                      class="progress-bar bg-danger"
+                      role="progressbar"
+                      style="width: 10%"
+                      aria-valuenow="10"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

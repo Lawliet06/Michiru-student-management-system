@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/auth.css" />
+    <link rel="stylesheet" href="/modal.css">
+  </head>
+  <body>
+    <section id="reg">
+      <!-- Modal -->
+      <div id="successModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2 id="modalTitle">Success!</h2>
+          <p id="modalMessage"></p>
+        </div>
+      </div>
+      <aside>
+        <h1>Add Admin</h1>
+        <form onsubmit="submitForm(event)">
+          <div id="pgMsg" class="errorMsg"></div>
+          <div class="formGroup" id="fName">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              name="usrName"
+              placeholder="Full Name"
+              onchange="fieldValid(event, 'fName')"
+              onkeyup="fieldValid(event, 'fName')"
+            />
+          </div>
+          <div class="formGroup" id="eMail">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              name="usrEmail"
+              placeholder="E-mail"
+              onchange="fieldValid(event, 'eMail')"
+              onkeyup="fieldValid(event, 'eMail')"
+            />
+          </div>
+          <div class="formGroup" id="pass">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="usrPass"
+              placeholder="Password"
+              onchange="passValid(event, 'pass')"
+              onkeyup="passValid(event, 'pass')"
+            />
+          </div>
+          <div class="formGroup" id="confPass">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="confPass"
+              placeholder="Confirm Password"
+              onchange="passValid(event, 'confPass')"
+              onkeyup="passValid(event, 'confPass')"
+            />
+          </div>
+          <button type="submit">CREATE</button>
+        </form>
+      </aside>
+    </section>
+    <script>
+      const validEmailFormat = (email) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+      };
+
+      const fieldValid = (event, parentId, fieldType = false) => {
+        let field;
+        if (fieldType) field = event;
+        else field = event.target;
+        let parentDiv = document.getElementById(parentId);
+        let pgMsg = document.getElementById("pgMsg");
+
+        if (!field.value) {
+          parentDiv.classList.add("invalid");
+          parentDiv.classList.remove("valid");
+          pgMsg.innerHTML = "Field cannot be empty";
+          return false;
+        } else {
+          if (field.name == "usrEmail") {
+            if (!validEmailFormat(field.value.trim())) {
+              parentDiv.classList.add("invalid");
+              parentDiv.classList.remove("valid");
+              pgMsg.innerHTML = "Invalid email format";
+              return false;
+            } else {
+              parentDiv.classList.remove("invalid");
+              parentDiv.classList.add("valid");
+              pgMsg.innerHTML = ""; // Clear the message
+              return true;
+            }
+          } else {
+            parentDiv.classList.remove("invalid");
+            parentDiv.classList.add("valid");
+            pgMsg.innerHTML = ""; // Clear the message
+            return true;
+          }
+        }
+      };
+
+      const passValid = (event, parentId, fieldType = false) => {
+        let field;
+        if (fieldType) field = event;
+        else field = event.target;
+        let parentDiv = document.getElementById(parentId);
+        let pgMsg = document.getElementById("pgMsg");
+
+        if (!field.value) {
+          parentDiv.classList.add("invalid");
+          parentDiv.classList.remove("valid");
+          pgMsg.innerHTML = "Password cannot be empty";
+          return false;
+        } else {
+          if (
+            document.querySelector('[name = "usrPass"]').value ==
+            document.querySelector('[name = "confPass"]').value
+          ) {
+            document.getElementById("pass").classList.add("valid");
+            document.getElementById("confPass").classList.add("valid");
+            document.getElementById("pass").classList.remove("invalid");
+            document.getElementById("confPass").classList.remove("invalid");
+            pgMsg.innerHTML = ""; // Clear the message
+            return true;
+          } else {
+            document.getElementById("pass").classList.remove("valid");
+            document.getElementById("confPass").classList.remove("valid");
+            document.getElementById("pass").classList.add("invalid");
+            document.getElementById("confPass").classList.add("invalid");
+            pgMsg.innerHTML = "Passwords do not match";
+            return false;
+          }
+        }
+      };
+
+      const clearField = (field) => {
+        field.classList.remove("is-invalid");
+        field.classList.remove("is-valid");
+        field.value = "";
+      };
+
+      const submitForm = (event) => {
+        event.preventDefault();
+
+        const usrName = document.querySelector('input[name="usrName"]');
+        const usrEmail = document.querySelector('input[name="usrEmail"]');
+        const usrPass = document.querySelector('input[name="usrPass"]');
+        const confPass = document.querySelector('input[name="confPass"]');
+
+        if (!fieldValid(usrName, "fName", true)) return false;
+        if (!fieldValid(usrEmail, "eMail", true)) return false;
+        if (!passValid(usrPass, "pass", true)) return false;
+        if (!passValid(confPass, "confPass", true)) return false;
+
+        const formData = {
+          usrName: usrName.value,
+          usrEmail: usrEmail.value,
+          usrPass: usrPass.value,
+          confPass: confPass.value,
+        };
+
+        fetch("/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((res) => res.json()) // Parse the JSON response
+          .then((data) => {
+            if (data.success) {
+              // Show success modal
+              showSignupModal(); // Show modal for successful signup
+            } else {
+              // Show the error message
+              document.getElementById("pgMsg").innerHTML =
+                data.message || "An unexpected error occurred.";
+            }
+          })
+          .catch((error) => {
+            document.getElementById("pgMsg").innerHTML =
+              "An error occurred: " + error.message;
+          });
+      };
+
+      // Function for displaying a success message upon successful signup
+      const showSignupModal = () => {
+        const modal = document.getElementById("successModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalMessage = document.getElementById("modalMessage");
+
+        modalTitle.textContent = "Success!";
+        modalMessage.textContent = "You have successfully added an admin.";
+        modal.style.display = "block";
+
+        // Automatically redirect after 3 seconds
+        setTimeout(() => {
+          window.location.href = "/home"; // Redirect after showing the modal
+        }, 3000);
+      };
+
+      // Function to close the modal
+      const closeModal = () => {
+        const modal = document.getElementById("successModal");
+        modal.style.display = "none";
+      };
+    </script>
+    <style>
+      /* Add some styling for error message */
+      .errorMsg {
+        color: red;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      /* Add some styling for valid and invalid classes */
+      .invalid input {
+        border-color: red;
+      }
+      .valid input {
+        border-color: green;
+      }
+    </style>
+  </body>
+</html>

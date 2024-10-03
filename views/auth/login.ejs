@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <section id="reg">
+        
+      <aside>
+        <img
+        src="/imgs/logoNogb.png"
+        alt="logo"
+        
+        style="width: 5rem; height: 5rem; margin-left: 10rem;"
+      />
+        <h1>SIGN IN</h1>
+        <form id="loginForm" onsubmit="submitForm(event)">
+          <div id="pgMsg" class="errorMsg"></div>
+          <div class="formGroup" id="eMail">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Registered E-mail"
+              onchange="fieldValid(event, 'eMail')"
+              onkeyup="fieldValid(event, 'eMail')"
+            />
+          </div>
+          <div class="formGroup" id="pass">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onchange="fieldValid(event, 'pass')"
+              onkeyup="fieldValid(event, 'pass')"
+            />
+          </div>
+          <button type="submit">LOGIN</button>
+          
+        </form>
+      </aside>
+    </section>
+    <script>
+      const validEmailFormat = (email) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+      };
+
+      const fieldValid = (event, parentId, fieldType = false) => {
+        let field;
+        if (fieldType) field = event;
+        else field = event.target;
+        let parentDiv = document.getElementById(parentId);
+        let pgMsg = document.getElementById("pgMsg");
+
+        if (!field.value) {
+          parentDiv.classList.add("invalid");
+          parentDiv.classList.remove("valid");
+          pgMsg.innerHTML = "Field cannot be empty";
+          return false;
+        } else {
+          if (field.name == "username") {
+            if (!validEmailFormat(field.value.trim())) {
+              parentDiv.classList.add("invalid");
+              parentDiv.classList.remove("valid");
+              pgMsg.innerHTML = "Invalid email format";
+              return false;
+            } else {
+              parentDiv.classList.remove("invalid");
+              parentDiv.classList.add("valid");
+              pgMsg.innerHTML = ""; // Clear the message
+              return true;
+            }
+          } else {
+            parentDiv.classList.remove("invalid");
+            parentDiv.classList.add("valid");
+            pgMsg.innerHTML = ""; // Clear the message
+            return true;
+          }
+        }
+      };
+
+      const clearField = (field) => {
+        field.classList.remove("invalid");
+        field.classList.remove("valid");
+        field.value = "";
+      };
+
+      const submitForm = async (event) => {
+        event.preventDefault();
+
+        const email = document.querySelector('input[name="email"]');
+        const password = document.querySelector('input[name="password"]');
+
+        if (!fieldValid(email, "eMail", true)) return false;
+        if (!fieldValid(password, "pass", true)) return false;
+
+        const formData = {
+          email: email.value,
+          password: password.value,
+        };
+
+        const endpoint = "/login";
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        };
+
+        try {
+          const res = await fetch(endpoint, options);
+
+          if (res.status === 200) {
+            clearField(email);
+            clearField(password);
+            window.location.href = "/home"; // Redirect on successful login
+          } else {
+            document.getElementById("pgMsg").innerHTML =
+              "Invalid email or password. Please try again.";
+          }
+        } catch (error) {
+          document.getElementById("pgMsg").innerHTML =
+            "Failed to connect to the server. Please try again.";
+        }
+      };
+    </script>
+    <style>
+      /* Add some styling for error message */
+      .errorMsg {
+        color: red;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      /* Add some styling for valid and invalid classes */
+      .invalid input {
+        border-color: red;
+      }
+      .valid input {
+        border-color: green;
+      }
+    </style>
+  </body>
+</html>

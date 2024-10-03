@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Navigation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body id="body-pd">
+    <header
+      class="container-fluid d-flex align-items-center justify-content-between p-2"
+    >
+      <div class="logo d-flex align-items-center">
+        <img
+          src="/imgs/logoNogb.png"
+          alt="logo"
+          class="img-fluid"
+          style="width: 5rem; height: 5rem"
+        />
+      </div>
+
+      <div class="headerContent flex-grow-1 text-center">
+        <h1
+          class="h6 mb-0"
+          style="color: #12192c; font-family: serif; font-size: 1.5rem"
+        >
+          Michiru View Secondary Schools Student Registration System
+        </h1>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <i class="fa-regular fa-bell me-3 headericon"></i>
+        <i class="fas fa-user headericon"></i>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="l-navbar" id="navbar">
+        <nav class="nav">
+          <div>
+            <div class="nav__brand">
+              <i class="fas fa-bars nav__toggle" id="nav-toggle"></i>
+              <a href="#" class="nav__logo">MVSSRS</a>
+            </div>
+            <div class="nav__list">
+              <a
+                href="/home"
+                class="nav__link <%= activePage === 'home' ? 'active' : '' %>"
+              >
+                <i class="fas fa-home nav__icon"></i>
+                <span class="nav__name">Dashboard</span>
+              </a>
+              <a
+                href="/add"
+                class="nav__link <%= activePage === 'add' ? 'active' : '' %>"
+              >
+                <i class="fa fa-user-plus nav__icon" aria-hidden="true"></i>
+                <span class="nav__name">Registration</span>
+              </a>
+
+              <a
+                href="/analytics"
+                class="nav__link <%= activePage === 'analytics' ? 'active' : '' %>"
+              >
+                <i class="fas fa-chart-pie nav__icon"></i>
+                <span class="nav__name">Analytics</span>
+              </a>
+              <a href="#" class="nav__link">
+                <i class="fas fa-users nav__icon"></i>
+                <span class="nav__name">Team</span>
+              </a>
+              <div class="nav__link collapse2">
+                <i class="fas fa-cog nav__icon"></i>
+                <span class="nav__name">Settings</span>
+                <i class="fas fa-chevron-down collapse__link"></i>
+              </div>
+              <div class="dropdown-container">
+                <!-- Chevron for toggle -->
+                <ul class="collapse__menu">
+                  <!-- Submenu to be shown/hidden -->
+                  <li>
+                    <a href="/signup" class="collapse__sublink">Add Admin</a>
+                  </li>
+                  <li>
+                    <a href="#" class="collapse__sublink">Remove an Admin</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a class="nav__link" onclick="logout()">
+            <i class="fas fa-sign-out-alt nav__icon"></i>
+            <span class="nav__name">Log Out</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <script>
+      const logout = () => {
+        window.location.href = "/logout";
+      };
+    </script>
+
+    <script>
+      /*===== EXPANDER MENU  =====*/
+      const showMenu = (toggleId, navbarId, bodyId) => {
+        const toggle = document.getElementById(toggleId),
+          navbar = document.getElementById(navbarId),
+          bodypadding = document.getElementById(bodyId);
+
+        const collapseNavbarOnResize = () => {
+          if (window.innerWidth <= 768) {
+            navbar.classList.remove("expander");
+            bodypadding.classList.remove("body-pd");
+          } else {
+            navbar.classList.add("expander"); // Always expanded on larger screens
+            bodypadding.classList.add("body-pd");
+          }
+        };
+
+        // Set the initial state of the navbar on page load
+        collapseNavbarOnResize();
+
+        if (toggle && navbar) {
+          toggle.addEventListener("click", () => {
+            navbar.classList.toggle("expander");
+            bodypadding.classList.toggle("body-pd");
+          });
+        }
+
+        window.addEventListener("resize", collapseNavbarOnResize);
+      };
+
+      showMenu("nav-toggle", "navbar", "body-pd");
+
+      // Adding active class functionality
+      const linkColor = document.querySelectorAll(".nav__link");
+
+      function colorLink(event) {
+        linkColor.forEach((link) => link.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+      }
+
+      linkColor.forEach((link) => {
+        link.addEventListener("click", colorLink);
+      });
+
+      var dropdown = document.getElementsByClassName("nav__link collapse2");
+      var i;
+
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
